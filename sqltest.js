@@ -54,10 +54,11 @@ connection.on("connect", err => {
     if (err) {
         console.error(err.message);
     } else {
-        addEntry([5,"Drew","Nancy"]);
-        readEntries();
+        addEntry([11,"Drew","Nancy",7032343234,"nDrew@gmail.com","4573 Southland Ave, Alexandria VA","4931 Street St, Richmond VA","Ukraine"]);
+        //addEntry(inputData);
+        //readEntries();
         //findEntrybyID(3);
-        //deleteEntry(3);
+        //deleteEntry(6);
     }
     
 });
@@ -214,7 +215,8 @@ function sendCommandSequence(command,i) {
     if (Array.isArray(command)) {
         let cmd_count = command.length;
         if (i >= cmd_count) {
-            return;
+            console.log("DONE");
+            process.exit(1);
         }
         let sqlString = command[i];
         console.log(sqlString);
@@ -245,15 +247,7 @@ function sendCommandSequence(command,i) {
         );
         connection.execSql(request);
     }
-    
 
-
-
-
-
-    
-
- 
 
     console.log("DONE");
 }
