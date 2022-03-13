@@ -1,28 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <meta charset="UTF-8">
-<title>Reunification Home</title>
+<title>DNA Profile Submission Form</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="stylesheet" href="">
+
 
 <style>
     body{ background-image: url("/back1.png");
 }
-
 </style>
-<script src=""></script>
-<body {margin: 0; height: 100%; overflow: hidden; position: fixed;}>
 
+<body {margin: 0; height: 100%; overflow: hidden; position: fixed;}>
     <head>
-        <h1 id="headerino"><br>DNA Profile Submission Form</h1>
         <link rel="stylesheet" href="styles.css">
+        <video id="webcam" autoplay playsinline width="640" height="480"></video>
+        <canvas id="canvas" class="d-none"></canvas>
+        <audio id="snapSound" src="audio/snap.wav" preload = "auto"></audio>
+
+        <h1 id="headerino"><br>DNA Profile Submission Form</h1>
+        <script type="text/javascript" src="https://unpkg.com/webcam-easy/dist/webcam-easy.min.js"></script>
+        <script src="submission.js"></script>
+    
       </head>
 
     <div id="submissionForm">
+
         <form action="/">
+            <input type="text" id="sBox" name="lastname" placeholder="Last Name"><br>
+            <input type="text" id="sBox" name="firstname" placeholder="First Name"><br>
+            <input type="text" id="sBox" name="Phone Number" placeholder="Phone Number"><br>
+            <input type="text" id="sBox" name="email" placeholder="Email Address"><br>
+            <input type="text" id="sBox" name="cAddress" placeholder="Current Address"><br>
+            <input type="text" id="sBox" name="pAddress" placeholder="Previous Address"><br>
+            <input type="text" id="sBox" name="Location" placeholder="Other Location Info"><br>
+            <input type="text" id="sBox" name="passport" placeholder="Passport ID"><br>
+            <input type="text" id="sBox" name="license" placeholder="Driver's License or State ID#"><br>
+            <input type="text" id="sBox" name="DNAid" placeholder="DNA Test Kit ID#"><br>
             <button id="btn">Submit Form</button>
-     </form>
-    </div>
+        </form>
+
+        <button id="btn" onclick="webcam.start()">Take Picture</button>
+
     </div>
 
 
