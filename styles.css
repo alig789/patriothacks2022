@@ -34,8 +34,8 @@ body {
     #canvas{
 
         position: absolute;
-        left: 500px;
-        top: 600px;
+        left: 0px;
+        top: 0px;
 
     }
 
@@ -73,7 +73,97 @@ body {
         border: solid #242424 1px;
     }
 
-    #sBox{
+    #sBox1{
+        -webkit-border-radius: 5;
+        -moz-border-radius: 5;
+        border-radius: 5px;
+        font-family: Arial;
+        padding: 9px;
+        font-size: 20px;
+        text-align: center;
+        border: solid #242424 1px;
+    }
+    #sBox2{
+        -webkit-border-radius: 5;
+        -moz-border-radius: 5;
+        border-radius: 5px;
+        font-family: Arial;
+        padding: 9px;
+        font-size: 20px;
+        text-align: center;
+        border: solid #242424 1px;
+    }
+    #sBox3{
+        -webkit-border-radius: 5;
+        -moz-border-radius: 5;
+        border-radius: 5px;
+        font-family: Arial;
+        padding: 9px;
+        font-size: 20px;
+        text-align: center;
+        border: solid #242424 1px;
+    }
+    #sBox4{
+        -webkit-border-radius: 5;
+        -moz-border-radius: 5;
+        border-radius: 5px;
+        font-family: Arial;
+        padding: 9px;
+        font-size: 20px;
+        text-align: center;
+        border: solid #242424 1px;
+    }
+    #sBox5{
+        -webkit-border-radius: 5;
+        -moz-border-radius: 5;
+        border-radius: 5px;
+        font-family: Arial;
+        padding: 9px;
+        font-size: 20px;
+        text-align: center;
+        border: solid #242424 1px;
+    }
+    #sBox6{
+        -webkit-border-radius: 5;
+        -moz-border-radius: 5;
+        border-radius: 5px;
+        font-family: Arial;
+        padding: 9px;
+        font-size: 20px;
+        text-align: center;
+        border: solid #242424 1px;
+    }
+    #sBox7{
+        -webkit-border-radius: 5;
+        -moz-border-radius: 5;
+        border-radius: 5px;
+        font-family: Arial;
+        padding: 9px;
+        font-size: 20px;
+        text-align: center;
+        border: solid #242424 1px;
+    }
+    #sBox8{
+        -webkit-border-radius: 5;
+        -moz-border-radius: 5;
+        border-radius: 5px;
+        font-family: Arial;
+        padding: 9px;
+        font-size: 20px;
+        text-align: center;
+        border: solid #242424 1px;
+    }
+    #sBox9{
+        -webkit-border-radius: 5;
+        -moz-border-radius: 5;
+        border-radius: 5px;
+        font-family: Arial;
+        padding: 9px;
+        font-size: 20px;
+        text-align: center;
+        border: solid #242424 1px;
+    }
+    #sBox10{
         -webkit-border-radius: 5;
         -moz-border-radius: 5;
         border-radius: 5px;
@@ -115,5 +205,27 @@ body {
     
       #btn:hover {
         background: #e2f2fc;
+        text-decoration: none;
+      }
+
+      #btn1 {
+        -webkit-border-radius: 5;
+        -moz-border-radius: 5;
+        border-radius: 5px;
+        text-shadow: 1px 1px 3px #000000;
+        font-family: Arial;
+        color: #ffffff;
+        font-size: 20px;
+        border: solid #000000 0px;
+        padding: 10px;
+        background: #e22424;
+        text-decoration: none;
+        position: absolute;
+        left: 500px;
+        top: 50%;
+      }
+    
+      #btn1:hover {
+        background: #df3f59;
         text-decoration: none;
       }

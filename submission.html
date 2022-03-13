@@ -14,6 +14,7 @@
 <body {margin: 0; height: 100%; overflow: hidden; position: fixed;}>
     <head>
         <link rel="stylesheet" href="styles.css">
+
         <video id="webcam" autoplay playsinline width="640" height="480"></video>
         <canvas id="canvas" class="d-none"></canvas>
         <audio id="snapSound" src="audio/snap.wav" preload = "auto"></audio>
@@ -26,22 +27,21 @@
 
     <div id="submissionForm">
 
-        <form action="/">
-            <input type="text" id="sBox" name="lastname" placeholder="Last Name"><br>
-            <input type="text" id="sBox" name="firstname" placeholder="First Name"><br>
-            <input type="text" id="sBox" name="Phone Number" placeholder="Phone Number"><br>
-            <input type="text" id="sBox" name="email" placeholder="Email Address"><br>
-            <input type="text" id="sBox" name="cAddress" placeholder="Current Address"><br>
-            <input type="text" id="sBox" name="pAddress" placeholder="Previous Address"><br>
-            <input type="text" id="sBox" name="Location" placeholder="Other Location Info"><br>
-            <input type="text" id="sBox" name="passport" placeholder="Passport ID"><br>
-            <input type="text" id="sBox" name="license" placeholder="Driver's License or State ID#"><br>
-            <input type="text" id="sBox" name="DNAid" placeholder="DNA Test Kit ID#"><br>
-            <button id="btn">Submit Form</button>
-        </form>
+    <form action="/">
+            <input type="text" id="sBox1" name="lastname" placeholder="Last Name" value=""><br>
+            <input type="text" id="sBox2" name="firstname" placeholder="First Name"><br>
+            <input type="text" id="sBox3" name="Phone Number" placeholder="Phone Number"><br>
+            <input type="text" id="sBox4" name="email" placeholder="Email Address"><br>
+            <input type="text" id="sBox5" name="cAddress" placeholder="Current Address"><br>
+            <input type="text" id="sBox6" name="pAddress" placeholder="Previous Address"><br>
+            <input type="text" id="sBox7" name="Location" placeholder="Other Location Info"><br>
 
-        <button id="btn" onclick="webcam.start()">Take Picture</button>
-
+            <input type="text" id="sBox8" name="passport" placeholder="Passport ID"><br>
+            <input type="text" id="sBox9" name="license" placeholder="Driver's License or State ID#"><br>
+            <input type="text" id="sBox10" name="DNAid" placeholder="DNA Test Kit ID#"><br>
+            <button id="btn" onclick="getInputs()">Submit Form</button>
+      </form>
+        <button id="btn1" value="off" onclick="webCamButton()">Open Webcam</button>
     </div>
 
 
