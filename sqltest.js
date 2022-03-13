@@ -13,6 +13,7 @@ const config = {
     options: {
         database: "patriothacks2022_database", 
         encrypt: true,
+        trustServerCertificate: false
 
     }
 };
@@ -53,10 +54,10 @@ connection.on("connect", err => {
     if (err) {
         console.error(err.message);
     } else {
-        addEntry([3,"Simpson","Homer"]);
-        //readEntries();
+        addEntry([5,"Drew","Nancy"]);
+        readEntries();
         //findEntrybyID(3);
-        //deleteEntry(2);
+        //deleteEntry(3);
     }
     
 });
@@ -96,29 +97,16 @@ function queryDatabase() {
 function deleteEntry(id) {
     console.log("Deleting entry...");
 
-    let sqlString = `DELETE FROM Persons WHERE PersonID = ${id};`
-    const request = new Request(
-        sqlString,
-        (err, rowCount) => {
-            if (err) {
-                console.error(err.message);
-            } else {
-                console.log(`${rowCount} row(s) returned`);
-            }
-        }
-    );
-    var entry = 0;
-    request.on("row", columns => {
-        console.log("entry #%d", entry)
-        entry++;
-        columns.forEach(column => {
-            console.log("%s\t%s", column.metadata.colName, column.value);
-        });
-        console.log("------------------------------");
-    });
+    sendCommand(`DELETE FROM Persons WHERE PersonID = ${id};`);
 
-    connection.execSql(request);
 }
+
+function delay(n) {
+    return new Promise(function (resolve) {
+        setTimeout(resolve, n * 1000);
+    });
+}
+
 
 function findEntrybyID(id) {
     console.log("Deleting entry...");
@@ -151,30 +139,7 @@ function findEntrybyID(id) {
 
 function readEntries() {
     console.log("Reading rows from the Table...");
-
-    // Read all rows from table
-    const request = new Request(
-
-        "SELECT * FROM Persons;",
-        (err, rowCount) => {
-            if (err) {
-                console.error(err.message);
-            } else {
-                console.log(`${rowCount} row(s) returned`);
-            }
-        }
-    );
-    var entry = 0;
-    request.on("row", columns => {
-        console.log("entry #%d", entry)
-        entry++;
-        columns.forEach(column => {
-            console.log("%s\t%s", column.metadata.colName, column.value);
-        });
-        console.log("------------------------------");
-    });
-
-    connection.execSql(request);
+    sendCommand("SELECT * FROM Persons");
 }
 
 
@@ -196,37 +161,100 @@ function addEntry(inputArray) {
     // Read all rows from table
 
     //add initial entry
+    console.log(`${sqlArray[0]} = ${inputArray[0]}`);
+    let sqlNameString = `INSERT INTO Persons (PersonID) VALUES(${inputArray[0]})`;
+    let commands = [];
+    commands.push(sqlNameString);
+    for (let i = 1; i < inputArray.length; i++) {
 
-    for (let i = 0; i < inputArray.length; i++) {
-        if (i == 0) {
-            let sqlNameString = `INSERT INTO Persons (PersonID) VALUES(${inputArray[0]})`;
-        }
-        else if (inputArray[i] != null) {
-            console.log(`${sqlArray[i]} + ${inputArray[i]}`);
+        if (inputArray[i] != null) {
+            console.log(`${sqlArray[i]} = ${inputArray[i]}`);
             let sqlString = `UPDATE Persons SET ${sqlArray[i]} = '${inputArray[i]}' WHERE PersonID = ${inputArray[0]}`;
-            const request = new Request(sqlString,
-                (err, rowCount) => {
-                    if (err) {
-                        console.error(err.message);
-                    } else {
-                        console.log(`${rowCount} row(s) returned`);
-                    }
-                }
-            );
-            var entry = 0;
-            request.on("row", columns => {
-                console.log("entry #%d", entry)
-                entry++;
-                columns.forEach(column => {
-                    console.log("%s\t%s", column.metadata.colName, column.value);
-                });
-            });
-            connection.execSql(request);
+            commands.push(sqlString);
+
 
         }
     }
 
-    
-
+    console.log(commands);
+    sendCommandSequence(commands,0);
     
 }
+
+function sendCommand(command) {
+    let sqlString = command;
+    const request = new Request(sqlString,
+        (err, rowCount) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(`${rowCount} row(s) returned`);
+            }
+        }
+    );
+
+    var entry = 0;
+    request.on("row", columns => {
+        console.log("entry #%d", entry)
+        entry++;
+        columns.forEach(column => {
+            console.log("%s\t%s", column.metadata.colName, column.value);
+        });
+        console.log("------------------------------");
+    });
+
+   request.on("requestCompleted", function () {x = 0 });
+
+    connection.execSql(request);
+    
+    console.log("DONE");
+}
+
+function sendCommandSequence(command,i) {
+    if (Array.isArray(command)) {
+        let cmd_count = command.length;
+        if (i >= cmd_count) {
+            return;
+        }
+        let sqlString = command[i];
+        console.log(sqlString);
+        const request = new Request(sqlString,
+            (err, rowCount) => {
+                if (err) {
+                    console.error(err.message);
+                } else {
+                    console.log(`${rowCount} row(s) returned`);
+                }
+            }
+        );
+        connection.execSql(request);
+        request.on('requestCompleted', function () {
+            sendCommandSequence(command, i+=1);
+        });
+    }
+    else {
+        let sqlString = command;
+        const request = new Request(sqlString,
+            (err, rowCount) => {
+                if (err) {
+                    console.error(err.message);
+                } else {
+                    console.log(`${rowCount} row(s) returned`);
+                }
+            }
+        );
+        connection.execSql(request);
+    }
+    
+
+
+
+
+
+    
+
+ 
+
+    console.log("DONE");
+}
+
